@@ -57,7 +57,8 @@ func DayActionInfo(data string, weight, height float64) string {
 		return ""
 	}
 
-	if steps == 0 {
+	if steps <= 0 || weight <= 0 || height <= 0 || userTime <= 0 {
+		log.Println("must not have a zero value")
 		return ""
 	}
 
