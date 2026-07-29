@@ -28,7 +28,7 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 
 	steps, err := strconv.Atoi(splitData[0])
 	if err != nil {
-		return 0, "", time.Duration(0), err
+		return 0, "", 0, err
 	}
 
 	actions := splitData[1]
@@ -36,7 +36,7 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 	timeString := splitData[2]
 	timeTraining, err := time.ParseDuration(timeString)
 	if err != nil {
-		return 0, "", time.Duration(0), err
+		return 0, "", 0, err
 	}
 
 	return steps, actions, timeTraining, nil
