@@ -28,7 +28,7 @@ func parsePackage(data string) (int, time.Duration, error) {
 
 	steps, err := strconv.Atoi(splitString[0])
 	if err != nil {
-		return 0, 0, err
+		return 0, 0, errors.New("invalid steps")
 	}
 
 	if steps <= 0 {
@@ -39,7 +39,10 @@ func parsePackage(data string) (int, time.Duration, error) {
 
 	userTime, err := time.ParseDuration(timeString)
 	if err != nil {
-		return 0, 0, err
+		return 0, 0, errors.New("invalid duration")
+	}
+	if userTime <= 0 {
+		return 0, 0, errors.New("invalid duration")
 	}
 
 	return steps, userTime, nil
