@@ -23,20 +23,20 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 	splitData := strings.Split(data, ",")
 
 	if len(splitData) != 3 {
-		return 0, "", 0, errors.New("invalid training data - splitData")
+		return 0, "", 0, errors.New("invalid data - splitData")
 	}
 
 	steps, err := strconv.Atoi(splitData[0])
 	if err != nil {
-		return 0, "", 0, errors.New("invalid training data - steps")
+		return 0, "", 0, errors.New("invalid data - steps")
 	}
 
 	actions := splitData[1]
-	
 	timeString := splitData[2]
+
 	timeTraining, err := time.ParseDuration(timeString)
 	if err != nil {
-		return 0, "", 0, err
+		return 0, "", 0, errors.New("invalid data timeTraining")
 	}
 
 	return steps, actions, timeTraining, nil
