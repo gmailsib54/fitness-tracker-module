@@ -31,12 +31,20 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 		return 0, "", 0, errors.New("invalid data - steps")
 	}
 
+	if steps <= 0 {
+		return 0, "", 0, errors.New("invalid data - steps <= 0")
+	}
+
 	actions := splitData[1]
 	timeString := splitData[2]
 
 	timeTraining, err := time.ParseDuration(timeString)
 	if err != nil {
 		return 0, "", 0, errors.New("invalid data timeTraining")
+	}
+
+	if timeTraining <= 0 {
+		return 0, "", 0, errors.New("invalid data - duration <= 0")
 	}
 
 	return steps, actions, timeTraining, nil
