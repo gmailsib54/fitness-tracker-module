@@ -32,9 +32,7 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 	}
 
 	actions := splitData[1]
-	if actions == "" {
-		return 0, "", 0, errors.New("invalid training data - actions")
-	}
+	
 	timeString := splitData[2]
 	timeTraining, err := time.ParseDuration(timeString)
 	if err != nil {
