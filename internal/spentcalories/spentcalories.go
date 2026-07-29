@@ -93,7 +93,7 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 				"Длительность: %.2f ч.\n"+
 				"Дистанция: %.2f км.\n"+
 				"Скорость: %.2f км/ч\n"+
-				"Сожгли калорий: %f", timeTraining.Hours(), distanceWalking, speedWalking, caloriesWalking)
+				"Сожгли калорий: %2f\n", timeTraining.Hours(), distanceWalking, speedWalking, caloriesWalking)
 
 		return result, nil
 
@@ -109,7 +109,7 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 				"Длительность: %.2f ч.\n"+
 				"Дистанция: %.2f км.\n"+
 				"Скорость: %.2f км/ч\n"+
-				"Сожгли калорий: %f", timeTraining.Hours(), distanceRunning, speedRunning, calories)
+				"Сожгли калорий: %2f\n", timeTraining.Hours(), distanceRunning, speedRunning, calories)
 
 		return result, nil
 	default:
@@ -119,29 +119,25 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// TODO: реализовать функцию
-	if steps <= 0 || weight <= 0 || height <= 0 {
+	if steps <= 0 || weight <= 0 || height <= 0 || duration <= 0 {
 		return 0, errors.New("invalid spent for running")
 	}
 	averageSpeed := meanSpeed(steps, height, duration)
-
 	timeMinute := duration.Minutes()
 
 	quantityCaloriesRunning := (weight * averageSpeed * timeMinute) / minInH
-
 	return quantityCaloriesRunning, nil
 
 }
 
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// TODO: реализовать функцию
-	if steps < 0 || weight < 0 || height < 0 {
+	if steps <= 0 || weight <= 0 || height <= 0 || duration <= 0 {
 		return 0, errors.New("invalid spent for walking")
 	}
 	averageSpeed := meanSpeed(steps, height, duration)
-
 	timeMinute := duration.Minutes()
 
 	quantityCaloriesWalking := (weight * averageSpeed * timeMinute) / minInH * walkingCaloriesCoefficient
-
 	return quantityCaloriesWalking, nil
 }
