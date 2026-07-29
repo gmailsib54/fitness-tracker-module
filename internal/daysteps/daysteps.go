@@ -22,12 +22,11 @@ func parsePackage(data string) (int, time.Duration, error) {
 	// TODO: реализовать функцию
 	splitString := strings.Split(data, ",")
 
-	if len(splitString) < 2 {
+	if len(splitString) != 2 {
 		return 0, 0, errors.New("invalid data")
 	}
 
 	steps, err := strconv.Atoi(splitString[0])
-
 	if err != nil {
 		return 0, 0, err
 	}
@@ -39,7 +38,6 @@ func parsePackage(data string) (int, time.Duration, error) {
 	timeString := splitString[1]
 
 	userTime, err := time.ParseDuration(timeString)
-
 	if err != nil {
 		return 0, 0, err
 	}
